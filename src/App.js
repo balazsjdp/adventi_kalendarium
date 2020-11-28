@@ -8,8 +8,8 @@ import { calendarEvents } from './calendarEvents.js';
 function App() {
 
 
-  const openedUntil = 5;
-  const currentDay= 10;
+  const openedUntil = new Date("2020-12-02");
+  const currentDay= new Date("2020-12-10");
 
   const christmasEve = new Date('2020-12-24');
   const now = new Date();
@@ -57,25 +57,25 @@ function App() {
       <div className="frame">
           <div className="container">
               <div className="row pb-5 pt-5">
-                {calendarEvents.map(event => {
+              {calendarEvents.map(event => {
                   let opened = event.day <= openedUntil ? true : false;
                   let openAble = (event.day <= currentDay & !opened) ? true : false
 
-                  console.log(event.day, "Opened: " + opened, "Openable: ",openAble)
+                  console.log(event.day.getDate(), "Opened: " + opened, "Openable: ",openAble)
 
                   return (
-                  <div key={event.day} className="col-6 col-md-2 mt-3">
-                    <div className={"calendar-entry " + (openAble ? "box-openable " : "") + (opened ? "opened" : "")}>
-                      <span className="calendar-entry-day">
-                      <img className="img-bow" src="resources/bow.svg"></img>
-                        <div className="sock-image-wrapper">
-                          <img onMouseOver={!opened ? onBoxHover : null} onClick={openAble ? onBoxOpen : null}  className="img-sock" src={`resources/${opened ? "gift-open" : "gift"}.svg`}></img>
-                          <span  className="calendar-day">{event.day}</span>
-                        </div>
-                        </span>
-                    </div>
-                    
-                  </div>)
+                    <div key={event.day.getDate()} className="col-6 col-md-2 mt-3">
+                      <div className={"calendar-entry " + (openAble ? "box-openable " : "") + (opened ? "opened" : "")}>
+                        <span className="calendar-entry-day">
+                        <img className="img-bow" src="resources/bow.svg"></img>
+                          <div className="sock-image-wrapper">
+                            <img onMouseOver={!opened ? onBoxHover : null} onClick={openAble ? onBoxOpen : null}  className="img-sock" src={`resources/${opened ? "gift-open" : "gift"}.svg`}></img>
+                            <span  className="calendar-day">{event.day.getDate()}</span>
+                          </div>
+                          </span>
+                      </div>
+                      
+                    </div>)
                 })}
                
               </div>
